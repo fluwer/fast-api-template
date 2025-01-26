@@ -1,0 +1,42 @@
+services:
+  postgres_asg:
+    container_name: postgres_asg
+    image: postgres:14.2
+    env_file:
+      .env
+    environment:
+      - POSTGRES_DB=asg
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5436:5432
+    networks:
+      - asg_net
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app_asg:
+    container_name: app_asg
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=postgres_asg
+    command: ./gunicorn_config.sh
+    ports:
+      - 8006:8000
+    networks:
+      - asg_net
+    depends_on:
+      - postgres_asg
+    restart: unless-stopped
+
+
+volumes:
+  db-data:
+
+networks:
+  asg_net:
+    driver: bridge
+    name: asg_net_main

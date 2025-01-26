@@ -1,0 +1,32 @@
+[tool.poetry]
+package-mode = false
+name = "asg-2"
+version = "2.0.0"
+description = "ASG сервис для FastAPI"
+authors = ["RN <flashkoshnik@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+alembic = "^1.14.0"
+asyncpg = "^0.30.0"
+sqlalchemy = "^2.0.36"
+pydantic-settings = "^2.7.0"
+fastapi = "^0.115.6"
+uvicorn = "^0.34.0"
+pydantic = { extras = ["email"], version = "^2.10.4" }
+gunicorn = "^23.0.0"
+orjson = "^3.10.15"
+python-jose = { extras = ["bcrypt"], version = "^3.3.0" }
+passlib = "^1.7.4"
+bcrypt = "4.0.1"
+dependency-injector = "^4.45.0"
+python-multipart = "^0.0.20"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
